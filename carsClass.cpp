@@ -8,6 +8,7 @@ public:
     int get_miles()const { return miles_on_clock; }
     std::string get_colour() const { return colour; }
     std::string get_make() const { return make; }
+    bool service_due_get() const;
     //setter
     void add_miles(int miles);
     //print
@@ -25,6 +26,11 @@ private:
 //-----------------------------------------------------------------------------
 //member functions of cars
 
+bool Cars::service_due_get() const {
+        std::cout << service_due << std::endl;
+        return service_due;
+        }
+
 void Cars::print() {
     std::cout << "car make: " << "\t" << get_make() << std::endl;
     std::cout << "car colour: " << "\t" << get_colour() << std::endl;
@@ -33,6 +39,8 @@ void Cars::print() {
 }
 
 void Cars::add_miles(int miles) {
+    //function pre-condition check for positive miles
+    if(miles < 0) throw "Can't add negative miles";
     service_check(miles);
     this->miles_on_clock += miles;
 }
@@ -54,10 +62,21 @@ bool Cars::service_check(int miles) {
 }
 
 int main() {
-    Cars Ford("white", "Ford focus", 1000);
-    Ford.print();
-    Cars BMW("Blue", "1 series");
-    BMW.print();
-    std::cout << "version 2";
+    try{
+        Cars Ford("white", "Ford focus", 10009);
+        Ford.print();
+        Ford.add_miles(10000);
+        Ford.print();
+        Ford.service_due_get();
+        Cars BMW("Blue", "1 series");
+        BMW.print();
+        std::cout << "version 3";
 
+    }
+    catch(const char * txtException){
+        std::cerr << "Exception: " << txtException;
+    }
+    catch(...){
+        std::cerr << "Exception: unhandled error";
+    }
 }
