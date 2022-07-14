@@ -1,2 +1,4 @@
-Trial adding more files to the project.
-Simple text file
+Additions for version 3:
+-Added error handling for int main()
+-Member functions which take an argument now have a pre-condition check to throw an error if they are wrong arguments
+-introduction of member function to get information on service due. returns a bool valkue and prints out if its true of false.

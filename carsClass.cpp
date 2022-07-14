@@ -47,7 +47,9 @@ void Cars::add_miles(int miles) {
 
 //every 10,000 miles service is due, if the miles added pushes over 10,000 miles service is changed to true.
 bool Cars::service_check(int miles) {
-    int temp{ miles_on_clock };
+    //function pre-condition : check for positive miles
+    if(miles < 0) throw "Can't add negative miles";
+    int temp{ get_miles() };
     while (temp > 10000) {
         temp -= 10000;
     }
@@ -71,7 +73,6 @@ int main() {
         Cars BMW("Blue", "1 series");
         BMW.print();
         std::cout << "version 3";
-
     }
     catch(const char * txtException){
         std::cerr << "Exception: " << txtException;
